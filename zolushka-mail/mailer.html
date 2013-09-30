@@ -1,0 +1,646 @@
+<!doctype html>
+<html>
+<head>
+	<title>Тут творятся чудеса</title>
+	<style type="text/css">/*<![CDATA[*/
+body { height: 100%; color: #000; background-color: #FFF; font-size: 0.70em; font-style: normal; line-height: 1.4em; font-family: Tahoma, Arial, Verdana, sans-serif;}
+
+table { height:100%; width:100%; border:1px solid #d8d8d8; border-collapse: collapse; }
+table td { background:#c0d7fd; vertical-align:top; }
+table td:hover { background:#b2c8ed; }
+table th { text-align:right; width:130px; padding-right:5px; }
+table select { width:150px; }
+#help { width:50px; float:right; }
+textarea { width:98%; height:200px; }
+.attach img { float:right; max-height:50px; cursor:pointer; display:none; }
+	/*]]>*/</style>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript">//<![CDATA[
+$(function(){	var storage=localStorage.getItem("zolushka-mailer"),
+		subject=$("#subject"),
+		text=$("#textarea"),
+		run=$("#start"),
+		af=$("#agef"),
+		at=$("#aget"),
+		goal=$("#goal"),
+		writers=$("#writers"),
+		black=$("#black"),
+
+		EnableTemplates=function()
+		{			var no=$("#templates option:first");			if(subject.find("option").size()>1)
+			{
+				subject.prop("disabled",false);
+				no.text("-темы-");
+			}
+			else
+			{
+				subject.prop("disabled",true);
+				no.text("-нет тем-");
+			}
+		},
+		SaveTemplate=function()
+		{
+			if(typeof storage[storage.active]!="undefined")
+				$.extend(storage[storage.active],{text:text.val(),af:af.val(),at:at.val()});
+		},
+		SaveStorage=function()
+		{
+			try
+			{
+				localStorage.setItem("zolushka-mailer",JSON.stringify(storage));
+			}
+			catch(e)
+			{
+				if(e==QUOTA_EXCEEDED_ERR)
+					alert("Локальное хранилище переполнено");
+			}
+		},
+		Status=function(n,q)
+		{
+			$("#status").text(n+", "+q);
+		},
+
+		EnableWriters=function()
+		{			var no=$("#writers option:first");
+			if(writers.find("option").size()>1)
+			{				writers.prop("disabled",false);
+				no.text("-писатели-");
+			}
+			else
+			{
+				writers.prop("disabled",true);
+				no.text("-нет писателей-");
+			}
+		},
+		EnableBlack=function()
+		{
+			var no=$("#black option:first");
+			if(black.find("option").size()>1)
+			{
+				black.prop("disabled",false);
+				no.text("-черный список-");
+			}
+			else
+			{
+				black.prop("disabled",true);
+				no.text("-пусто-");
+			}
+		},
+
+		//Лимит отправки 999 писем
+		N=document.ZOLUSHKA.name,
+		D=new Date();
+
+	D.setHours( D.getTimezoneOffset()/60-3 );
+	D=D.getFullYear()+"-"+(D.getMonth()+1)+"-"+D.getDate();
+
+	if(storage)
+	{
+		storage=jQuery.parseJSON(storage)||{};
+		if(typeof storage.last=="undefined")
+			storage={last:1,active:0,black:{},writers:{},photo:0,goal:"online"};
+		else
+		{
+			$.each(storage,function(k,v){
+				if(k==parseInt(k))
+					$("<option>").val(k).text(v.title).appendTo(subject);
+			});
+			if(storage.goal)
+				goal.val(storage.goal);
+			if(storage.writers)
+				$.each(storage.writers,function(k,v){					$("<option>").text(v ? v : k).val(k).appendTo(writers);				});
+			else
+				storage.writers={};
+			if(storage.black)
+				$.each(storage.black,function(k,v){
+					$("<option>").text(v ? v : k).val(k).appendTo(black);
+				});
+			else
+				storage.black={};
+			EnableTemplates();
+			EnableWriters();
+			EnableBlack();
+		}
+	}
+	else
+		storage={last:1,active:0,black:{},writers:{},photo:0};
+
+	if(typeof storage["-"+N]=="undefined" || typeof storage["-"+N][D]=="undefined")
+	{
+		storage["-"+N]={};
+		storage["-"+N][D]=999;
+	}
+
+	subject.change(function(){
+		var v=$(this).val(),
+			save=storage.active!=v,
+			controls=$("#delt,#editt,#savet,#start");
+
+		if(save)
+			SaveTemplate();
+		if(v=="0")
+		{
+			controls.prop("disabled",true);
+			text.val(text.prop("defaultValue"));
+			af.val(af.prop("defaultValue"));
+			at.val(at.prop("defaultValue"));
+			Status(0,0);
+		}
+		else if(typeof storage[v]=="undefined")
+			$("option:selected",this).remove();
+		else
+		{
+			af.val(storage[v].af);
+			at.val(storage[v].at);
+			text.val(storage[v].text);
+			Status(storage[v].cnt,0);
+			controls.prop("disabled",false);
+			if(typeof storage[v].offlinepage=="undefined")
+				storage[v].offlinepage=0;
+		}
+		storage.active=v;
+		if(save)
+			SaveStorage();
+	}).val(storage.active).change();
+
+	$("#addt").click(function(){
+		var n=prompt("Введите тему письма");
+		if(n)
+		{
+			$("<option>").val(storage.last).text(n).appendTo(subject);
+			storage[storage.last]={title:n,text:text.val(),af:af.val(),at:at.val(),sent:",",cnt:0,offlinepage:0};
+
+			EnableTemplates();
+			subject.val(storage.last++).change();
+		}
+	});
+
+	$("#savet").click(function(){
+		SaveTemplate();
+		SaveStorage();
+	});
+
+	$("#editt").click(function(){
+		var v=subject.val(),
+			t=$("#subject option:selected"),
+			n=prompt("Введите новую тему письма",t.text());
+		if(n && typeof storage[v]!="undefined")
+		{
+			t.text(n);
+			storage[v].title=n;
+			SaveStorage();
+		}
+	});
+
+	$("#delt").click(function(){
+		var v=subject.val(),
+			t=$("#subject option:selected");
+		if(v && (typeof storage[v]=="undefined" || confirm("Вы действительно хотите удалить письмо \""+t.text()+"\"?")))
+		{
+			var next=t.next().size()>0 ? t.next() : t.prev();
+			t.remove();
+			delete storage[v];
+			subject.val(next.val()).change();
+			EnableTemplates();
+		}
+	});
+
+	goal.change(function(){		var v=$(this).val(),
+			controls=$("#writers,#addw,#delw,#editw");
+		if(v=="writers")
+			controls.show();
+		else
+			controls.hide();
+		storage.goal=v;
+		SaveStorage();	}).change();
+
+	//Управление писателями
+	writers.change(function(){
+		$("#delw,#editw").prop("disabled",$(this).val()==0);
+	}).change();
+
+	$("#addw").click(function(){		var n=prompt("Введите ID писателя");
+		n=n.replace(/\D+/,"");
+		if(n && writers.find("[value="+n+"]").size()==0)
+		{			$("<option>").val(n).text(n).appendTo(writers);
+			writers.val(n).change();
+			storage.writers[n]="";
+			EnableWriters();
+			SaveStorage();
+		}	});
+
+	$("#editw").click(function(){
+		var v=writers.val(),
+			t=$("#writers option:selected"),
+			n=prompt("Введите новый ID",t.text());
+		if(n && typeof storage.writers[n]=="undefined")
+		{
+			t.val(n).text(n);
+			delete storage.writers[v];
+			storage.writers[n]="";
+			SaveStorage();
+		}
+	});
+
+	$("#delw").click(function(){
+		var v=writers.val(),
+			t=$("#writers option:selected");
+		if(v && confirm("Вы действительно хотите удалить писателя \""+t.text()+"\"?"))
+		{
+			t.remove();
+			delete storage.writers[v];
+			writers.change();
+			EnableWriters();
+			SaveStorage();
+		}
+	});
+
+	//Управление черным списком	black.change(function(){
+		$("#delb,#editb").prop("disabled",$(this).val()==0);
+	}).change();
+
+	$("#addb").click(function(){
+		var n=prompt("Введите ID мужика");
+		n=n.replace(/\D+/,"");
+		if(n && black.find("[value="+n+"]").size()==0)
+		{
+			$("<option>").val(n).text(n).appendTo(black);
+			black.val(n).change();
+			storage.black[n]="";
+			EnableBlack();
+			SaveStorage();
+		}
+	});
+
+	$("#editb").click(function(){
+		var v=black.val(),
+			t=$("#black option:selected"),
+			n=prompt("Введите новый ID",t.text());
+		if(n && typeof storage.black[n]=="undefined")
+		{
+			t.val(n).text(n);
+			delete storage.black[v];
+			storage.black[n]="";
+			SaveStorage();
+		}
+	});
+
+	$("#delb").click(function(){
+		var v=black.val(),
+			t=$("#black option:selected");
+		if(v && confirm("Вы действительно хотите удалить мужика \""+t.text()+"\"?"))
+		{
+			t.remove();
+			delete storage.black[v];
+			black.change();
+			EnableBlack();
+			SaveStorage();
+		}
+	});
+
+	//Фотки
+	var preview=$(".attach img"),
+		attach=$("#attach"),
+		afo=$("#attach option:first").text("Зарузка...");
+
+	attach.prop("disable",true);
+	$.get(location.protocol+"//"+location.hostname+"/email/attachmentminder.aspx",function(phs){		var ind1=phs.indexOf("<form"),
+			ind2=phs.indexOf(">",ind1+1),
+			ind3=phs.indexOf("</form>",ind2+1);
+		phs=phs.substring(ind2+1,ind3);
+		phs=$("<div>").html(phs);
+		phs.find("#The_GridView table[id]").each(function(){			$("<option>").text($(this).prop("id")).appendTo(attach);		});
+		phs.remove();
+
+		attach.prop("disable",false).val(storage.photo).change(function(){			var v=$(this).val();
+			if(v==0)
+				preview.hide();
+			else
+				preview.show().prop("src","../email/attachmentimagegenerator.aspx?emailattachment="+v).data("src",v);
+			storage.photo=v;
+			SaveStorage();		}).change();
+		afo.text("-без фотографии-");
+		preview.click(function(){			window.open("../email/AttachmentViewer.aspx?emailattachment="+$(this).data("src"));		});
+	},"text");
+
+	//Работа с отправкой
+	var top,//TimeOut парсера
+		tos,//TimeOut сендера
+		runned=false,
+		ibp=500,//Интервал перехода между страницами
+		queue={},
+		qcnt=0,
+		sta,
+		searchtype,
+		inprogress="",
+		StartSender=function()
+		{
+			var issent=false;
+			$.each(queue,function(k,v){
+				issent=true;				var id=k.substr(1),//Заплатка, ибо если делать ключи числовыми - браузер выстраивает их по порядку (возрастанию)
+					Send=function(){						$.get(location.protocol+"//"+location.hostname+"/email/sendmail.aspx?toid="+id+"&func=send",function(r){
+							var gvs=r.match(/id="__VIEWSTATE" value="([^"]+)"/),
+								test=r.match(/id="uxTest" value="([^"]+)"/),
+								photo=attach.val(),
+								params={__VIEWSTATE:gvs[1],uxSubject:v.s,uxBody:v.t.replace(/\n/g,"\r\n"),uxTest:test[1],"uxSubmit.x":42,"uxSubmit.y":12},
+
+								//Замена имени
+								name=r.match(/<span id="uxUserName">\S+ \(([^)]+)\)<\/span>/);
+								name=name ? name[1] : "";
+								params.uxSubject=params.uxSubject.replace(/\{name\}/ig,name);
+								params.uxBody=params.uxBody.replace(/\{name\}/ig,name);
+
+							if(photo!=0)
+								params.uxAttachment="on";
+
+							$.post(location.protocol+"//"+location.hostname+"/email/sendmail.aspx?toid="+id+"&func=send",params,function(pr){
+								if(pr.indexOf("Your email was sent")!=-1)
+								{
+									var m=pr.match(/MsgID=(\d+)/);
+									if(photo==0 || !m)
+										v.F(true);
+									else
+										$.get(location.protocol+"//"+location.hostname+"/email/attachment_attach.aspx?emailattachment="+photo+"&msgid="+m[1],function(){
+											v.F(true);
+										},"text");
+								}
+								else
+									v.F(false);
+							},"text");
+						},"text");
+					};
+
+				if(searchtype=="writers")
+					Send();
+				else
+				{					$.get(location.protocol+"//"+location.hostname+"/profile/profile.aspx?toid="+id,function(r){
+						r=r.replace(/<script[^>]*>|<\/script>/g,"");
+						var ind1=r.indexOf("<form"),
+							ind2=r.indexOf(">",ind1+1),
+							ind3=r.indexOf("</form>",ind2+1);
+						r=r.substring(ind2+1,ind3);
+						r=r.replace(/<img[^>]+>/ig,"");
+						r=$("<div>").html(r);
+
+						if(searchtype=="online" && (r.find("#ucProfileBar_uxFavorites").prop("title")+"").indexOf("Remove")==0)//При рассылке по онлайну игнорируем тех, кто в списке пар и фаворитов
+							v.F(false);
+						else if(r.find("#uxMemberlevel").text()!="Bronze Member")
+							Send();
+						else
+							v.F(false);
+
+						r.remove();
+					},"text");				}
+
+				delete queue[k];
+				return false;			});
+			if(runned)
+				if(issent)
+					StartSender();
+				else
+					tos=setTimeout(StartSender,500);
+		},
+
+		Parse4Send=function(vs,vsid,page,content)
+		{
+			if(!$.isEmptyObject(queue))
+			{
+				tos=setTimeout(function(){ Parse4Send(vs,vsid,page,content); },1000);
+				return;
+			}
+			var af=parseInt(sta.af),
+				at=parseInt(sta.at),
+				Fcontent=function(men)
+				{
+					men=men.replace(/<script[^>]*>|<\/script>/g,"");
+					var ind1=men.indexOf("<form"),
+						ind2=men.indexOf(">",ind1+1),
+						ind3=men.indexOf("</form>",ind2+1);
+					men=men.substring(ind2+1,ind3);
+					men=men.replace(/<img[^>]+>/ig,"");
+					men=$("<div>").html(men);
+
+					men.find("table.ProfileCardMainTable").each(function(){
+						var id=parseInt($.trim($(".ProfileCardRightTD:last",this).text())),
+							repl={
+								login:$.trim($(".ProfileCardUserName",this).text()),
+								age:parseInt($.trim($(".ProfileCardRightTD:first",this).text())),
+								height:parseInt($.trim($(".ProfileCardRightTD:eq(1)",this).text())),
+								weight:parseInt($.trim($(".ProfileCardRightTD:eq(2)",this).text()))
+							};
+
+						if(af<=repl.age && repl.age<=at && sta.sent.indexOf(","+id+",")==-1 && inprogress.indexOf(","+id+",")==-1 && (typeof queue["u"+id]=="undefined") && typeof storage.black[id]=="undefined")
+						{
+							inprogress+=","+id+",";							queue["u"+id]={};							var s=sta.title,
+								t=sta.text;
+
+							$.each(repl,function(k,v){
+								var R=new RegExp("{"+k+"}","ig");
+								s=s.replace(R,v);
+								t=t.replace(R,v);
+							});
+							queue["u"+id]={s:s,t:t,F:function(st){								if(runned && page>sta.offlinepage)
+								{
+									sta.offlinepage=page;
+									if(!st)
+										SaveStorage();
+								}
+
+								if(st)
+								{									sta.sent+=id+",";
+									sta.cnt++;
+									if(--storage["-"+N][D]<=0)
+										run.click();
+									SaveStorage();
+								}
+								Status(sta.cnt,qcnt>0 ? --qcnt : 0);
+							}};
+							++qcnt;
+							if(runned)
+								Status(sta.cnt,qcnt);
+						}
+					});
+
+					if(runned)
+					{
+						page=parseInt(men.find("#ddlPages").val());
+						var pages=parseInt(men.find("#lblPageCount").text());
+						if(page<pages)
+							top=setTimeout(function(){ Parse4Send(vs,vsid,page+1,false); },ibp);
+						else
+						{
+							top=setTimeout(function(){
+
+								$.get(location.protocol+"//"+location.hostname+"/searches/search.aspx?searchtype="+searchtype,{},function(r){
+									var vs=r.match(/id="__VIEWSTATE" value="([^"]+)"/),
+										vsid=r.match(/vsid=([^"]+)/);
+									if(vs && vsid)
+										Parse4Send(vs[1],vsid[1],1,r);
+								},"text");
+
+							},ibp);
+						}
+					}
+
+					men.remove();
+				};
+
+			if(content)
+				Fcontent(content);
+			else
+				$.post(location.protocol+"//"+location.hostname+"/searches/search.aspx?searchtype="+searchtype+"&vsid="+vsid,{__EVENTTARGET:"ddlPages",__VIEWSTATE:vs,ddlPages:page},Fcontent,"text");
+		},
+		StartParser=function()
+		{
+			if(typeof sta.offlinepage=="undefined")
+				sta.offlinepage=0;			$.get(location.protocol+"//"+location.hostname+"/searches/search.aspx?searchtype="+searchtype,{},function(r){
+				var vs=r.match(/id="__VIEWSTATE" value="([^"]+)"/),
+					vsid=r.match(/vsid=([^"]+)/);
+
+				if(vs && vsid)
+					if(searchtype=="advanced" && sta.offlinepage>1)
+						Parse4Send(vs[1],vsid[1],sta.offlinepage,false);
+					else
+						Parse4Send(vs[1],vsid[1],1,r);
+			},"text");		};
+
+	run.click(function(){
+		var th=$(this),
+			d=$("table :input").not(this).not("#help");
+		searchtype=goal.val();
+		if(runned)
+		{
+			//Остановка процесса
+			d.prop("disabled",false);
+			EnableWriters();
+			EnableBlack();
+			clearTimeout(tos);
+			clearTimeout(top);
+			queue={};
+			qcnt=0;
+			th.val("Пуск");
+			runned=false;
+			Status(searchtype=="writers" ? 0 : sta.cnt,0);
+		}
+		else
+		{
+			SaveTemplate();
+			SaveStorage();
+			sta=storage[storage.active];
+
+			if(storage["-"+N][D]<=0)
+				alert("На сегодня лимит рассылки исчерпан. Приходите завтра.");
+			else if(sta.text=="")
+				alert("Введите текст письма!");
+			else if(sta.title=="")
+				alert("Введите тему письма!");
+			else
+			{				//Запуск процесса
+				runned=true;
+				d.prop("disabled",true);
+				th.val("Стоп");
+				$.get(location.protocol+"//"+location.hostname+"/myhome/myhome.aspx",function(r){
+					var name=r.match(/Добро пожаловать ([^<]+)/);
+					name=name ? name[1] : "";
+					if(name==document.ZOLUSHKA.name)
+					{
+						if(searchtype=="writers")
+						{
+							var cnt=0,
+								wrs=writers.find("option");
+							if(wrs.size()<2)
+							{
+								alert("Заполните писателей");
+								return;
+							}
+
+							wrs.each(function(){
+								var id=parseInt($(this).val());
+								if(id>0 && typeof storage.black[id]=="undefined")
+								{
+									queue["u"+id]={s:sta.title,t:sta.text,F:function(){
+										Status(++cnt,--qcnt);
+
+										if(qcnt==0)
+											alert("Рассылка завершена!");
+
+										if(--storage["-"+N][D]<=0 || qcnt==0)
+											run.click();
+										SaveStorage();//Только для учета отправленных
+									}};
+									Status(cnt,++qcnt);
+								}
+							});
+						}
+						else
+							StartParser();
+						StartSender();
+					}
+					else
+					{
+						alert("Произошла ошибка, закройте окно и откройте наново");
+						run.click();
+					}
+				});
+			}
+		}
+	});
+
+	$("#help").click(function(){
+		alert("Учетная запись оплачена до "+document.ZOLUSHKA.date+".\
+Осталось "+document.ZOLUSHKA.remain+". Вы еще можете отправить "+storage["-"+N][D]+" писем.\n\
+\n\
+Внимание! Все тексты сохраняются внутри браузера! Рекомендуем хранить их копии в более надежном месте.\
+\n\n\
+Поддерживаются следующие переменные:\n\
+{Name} - имя пользователя\n\
+{Login} - ник пользователя\n\
+{Age} - возраст\n\
+{Height} - рост \n\
+{Weight} - вес \n\
+\n\
+Alexander Sunvas © 2012\n\
+E-mail: a@eleanor-cms.ru");
+	});});
+//]]></script>
+</head>
+<body>
+<table>
+	<tr>
+		<th>Темы (subject)</th>
+		<td><select id="subject" disabled="disabled"><option value="0">-нет тем-</option></select><input type="button" id="addt" value="+" title="Добавить" /><input type="button" id="delt" value="&minus;" title="Удалить" /><input type="button" id="editt" value="E" title="Редактировать" /><input type="button" id="savet" value="S" title="Сохранить" /><input type="button" id="help" value="?"></td>
+	</tr>
+	<tr>
+		<th>Цель</th>
+		<td><select id="goal"><option value="online">По списку онлайн</option><option value="writers">По писателям</option><option value="matches">По парам</option><option value="admirers">По поклонникам</option><option value="favorites">По фаворитам</option><option value="advanced">По списку офлайн</option></select><select id="writers"><option value="0">-пусто-</option></select><input type="button" id="addw" value="+" title="Добавить" /><input type="button" id="delw" value="&minus;" title="Удалить" /><input type="button" id="editw" value="E" title="Редактировать" /></td>
+	</tr>
+	<tr>
+		<th>Черный список</th>
+		<td><select id="black"><option value="0">-пусто-</option></select><input type="button" id="addb" value="+" title="Добавить" /><input type="button" id="delb" value="&minus;" title="Удалить" /><input type="button" id="editb" value="E" title="Редактировать" /></td>
+	</tr>
+	<tr>
+		<th>Текст</th>
+		<td><textarea id="textarea" placeholder="Введите текст письма">{Name}</textarea></td>
+	</tr>
+	<tr>
+		<th>Фотки</th>
+		<td class="attach">
+			<img src="" alt="" />
+			<select id="attach"><option value="0">-без фотографии-</option></select><br /><a href="../email/attachmentminder.aspx" target="_blank">Загрузить / удалить</a>
+		</td>
+	</tr>
+	<tr>
+		<th>Возраст</th>
+		<td><input type="number" id="agef" min="18" max="90" value="30" title="от" /> - <input type="number" id="aget" min="18" max="90" value="50" title="до" /></td>
+	</tr>
+	<tr>
+		<th>Состояние</th>
+		<td><input type="button" id="start" value="Пуск" title="Начать рассылку" /></td>
+	</tr>
+	<tr>
+		<th>Разослано, очередь</th>
+		<td id="status">58, 65</td>
+	</tr>
+</table>
+</body>
+</html>
