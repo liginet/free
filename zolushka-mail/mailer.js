@@ -15,8 +15,8 @@ $(function(){
 
 		//$.getJSON("http://zolushka.wmid.com.ua/mailer.php?name="+$("#uxWelcomeTxt",main.document).html().replace("Добро пожаловать ","")+"&window=?",function(r){
 			win.document.open('text/html','replace');
-			win.document.ZOLUSHKA={remain:r.remain,date:r.date,name:r.name};
-			win.document.write(r.html);
+			//win.document.ZOLUSHKA={remain:r.remain,date:r.date,name:r.name};
+			win.document.write(ses);
 			win.document.close();
 		//});
 	});
