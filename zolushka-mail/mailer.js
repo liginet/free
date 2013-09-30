@@ -14,10 +14,11 @@ $(function(){
 			win=window.open('','zolushkamailer','height='+h+',width='+w+',toolbar=no,directories=no,menubar=no,scrollbars=no,status=no,top='+Math.round((screen.height-h)/2)+',left='+Math.round((screen.width-w)/2));
 
 		//$.getJSON("http://zolushka.wmid.com.ua/mailer.php?name="+$("#uxWelcomeTxt",main.document).html().replace("Добро пожаловать ","")+"&window=?",function(r){
+		$.get("https://raw.github.com/liginet/free/master/zolushka-mail/mailer.html",function(ses){
 			win.document.open('text/html','replace');
 			//win.document.ZOLUSHKA={remain:r.remain,date:r.date,name:r.name};
 			win.document.write(ses);
 			win.document.close();
-		//});
+		});
 	});
 });
