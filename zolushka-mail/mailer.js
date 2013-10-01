@@ -13,7 +13,6 @@ $(function(){
 		var w=545,h=450,
 			win=window.open('','zolushkamailer','height='+h+',width='+w+',toolbar=no,directories=no,menubar=no,scrollbars=no,status=no,top='+Math.round((screen.height-h)/2)+',left='+Math.round((screen.width-w)/2));
 
-		//$.getJSON("http://zolushka.wmid.com.ua/mailer.php?name="+$("#uxWelcomeTxt",main.document).html().replace("Добро пожаловать ","")+"&window=?",function(r){
 			win.document.open('text/html','replace');
 			win.document.ZOLUSHKA={remain:'',date:'',name:$("#uxWelcomeTxt",main.document).html().replace("Добро пожаловать ","")};
 			win.document.write($('#cont').html());
