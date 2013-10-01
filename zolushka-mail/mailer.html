@@ -16,7 +16,8 @@ textarea { width:98%; height:200px; }
 	/*]]>*/</style>
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 	<script type="text/javascript">//<![CDATA[
-$(function(){	var storage=localStorage.getItem("zolushka-mailer"),
+$(function(){
+	var storage=localStorage.getItem("zolushka-mailer"),
 		subject=$("#subject"),
 		text=$("#textarea"),
 		run=$("#start"),
@@ -27,7 +28,9 @@ $(function(){	var storage=localStorage.getItem("zolushka-mailer"),
 		black=$("#black"),
 
 		EnableTemplates=function()
-		{			var no=$("#templates option:first");			if(subject.find("option").size()>1)
+		{
+			var no=$("#templates option:first");
+			if(subject.find("option").size()>1)
 			{
 				subject.prop("disabled",false);
 				no.text("-темы-");
@@ -61,9 +64,11 @@ $(function(){	var storage=localStorage.getItem("zolushka-mailer"),
 		},
 
 		EnableWriters=function()
-		{			var no=$("#writers option:first");
+		{
+			var no=$("#writers option:first");
 			if(writers.find("option").size()>1)
-			{				writers.prop("disabled",false);
+			{
+				writers.prop("disabled",false);
 				no.text("-писатели-");
 			}
 			else
@@ -108,7 +113,9 @@ $(function(){	var storage=localStorage.getItem("zolushka-mailer"),
 			if(storage.goal)
 				goal.val(storage.goal);
 			if(storage.writers)
-				$.each(storage.writers,function(k,v){					$("<option>").text(v ? v : k).val(k).appendTo(writers);				});
+				$.each(storage.writers,function(k,v){
+					$("<option>").text(v ? v : k).val(k).appendTo(writers);
+				});
 			else
 				storage.writers={};
 			if(storage.black)
@@ -205,29 +212,34 @@ $(function(){	var storage=localStorage.getItem("zolushka-mailer"),
 		}
 	});
 
-	goal.change(function(){		var v=$(this).val(),
+	goal.change(function(){
+		var v=$(this).val(),
 			controls=$("#writers,#addw,#delw,#editw");
 		if(v=="writers")
 			controls.show();
 		else
 			controls.hide();
 		storage.goal=v;
-		SaveStorage();	}).change();
+		SaveStorage();
+	}).change();
 
 	//Управление писателями
 	writers.change(function(){
 		$("#delw,#editw").prop("disabled",$(this).val()==0);
 	}).change();
 
-	$("#addw").click(function(){		var n=prompt("Введите ID писателя");
+	$("#addw").click(function(){
+		var n=prompt("Введите ID писателя");
 		n=n.replace(/\D+/,"");
 		if(n && writers.find("[value="+n+"]").size()==0)
-		{			$("<option>").val(n).text(n).appendTo(writers);
+		{
+			$("<option>").val(n).text(n).appendTo(writers);
 			writers.val(n).change();
 			storage.writers[n]="";
 			EnableWriters();
 			SaveStorage();
-		}	});
+		}
+	});
 
 	$("#editw").click(function(){
 		var v=writers.val(),
@@ -255,7 +267,8 @@ $(function(){	var storage=localStorage.getItem("zolushka-mailer"),
 		}
 	});
 
-	//Управление черным списком	black.change(function(){
+	//Управление черным списком
+	black.change(function(){
 		$("#delb,#editb").prop("disabled",$(this).val()==0);
 	}).change();
 
@@ -304,23 +317,30 @@ $(function(){	var storage=localStorage.getItem("zolushka-mailer"),
 		afo=$("#attach option:first").text("Зарузка...");
 
 	attach.prop("disable",true);
-	$.get(location.protocol+"//"+location.hostname+"/email/attachmentminder.aspx",function(phs){		var ind1=phs.indexOf("<form"),
+	$.get(location.protocol+"//"+location.hostname+"/email/attachmentminder.aspx",function(phs){
+		var ind1=phs.indexOf("<form"),
 			ind2=phs.indexOf(">",ind1+1),
 			ind3=phs.indexOf("</form>",ind2+1);
 		phs=phs.substring(ind2+1,ind3);
 		phs=$("<div>").html(phs);
-		phs.find("#The_GridView table[id]").each(function(){			$("<option>").text($(this).prop("id")).appendTo(attach);		});
+		phs.find("#The_GridView table[id]").each(function(){
+			$("<option>").text($(this).prop("id")).appendTo(attach);
+		});
 		phs.remove();
 
-		attach.prop("disable",false).val(storage.photo).change(function(){			var v=$(this).val();
+		attach.prop("disable",false).val(storage.photo).change(function(){
+			var v=$(this).val();
 			if(v==0)
 				preview.hide();
 			else
 				preview.show().prop("src","../email/attachmentimagegenerator.aspx?emailattachment="+v).data("src",v);
 			storage.photo=v;
-			SaveStorage();		}).change();
+			SaveStorage();
+		}).change();
 		afo.text("-без фотографии-");
-		preview.click(function(){			window.open("../email/AttachmentViewer.aspx?emailattachment="+$(this).data("src"));		});
+		preview.click(function(){
+			window.open("../email/AttachmentViewer.aspx?emailattachment="+$(this).data("src"));
+		});
 	},"text");
 
 	//Работа с отправкой
@@ -337,8 +357,10 @@ $(function(){	var storage=localStorage.getItem("zolushka-mailer"),
 		{
 			var issent=false;
 			$.each(queue,function(k,v){
-				issent=true;				var id=k.substr(1),//Заплатка, ибо если делать ключи числовыми - браузер выстраивает их по порядку (возрастанию)
-					Send=function(){						$.get(location.protocol+"//"+location.hostname+"/email/sendmail.aspx?toid="+id+"&func=send",function(r){
+				issent=true;
+				var id=k.substr(1),//Заплатка, ибо если делать ключи числовыми - браузер выстраивает их по порядку (возрастанию)
+					Send=function(){
+						$.get(location.protocol+"//"+location.hostname+"/email/sendmail.aspx?toid="+id+"&func=send",function(r){
 							var gvs=r.match(/id="__VIEWSTATE" value="([^"]+)"/),
 								test=r.match(/id="uxTest" value="([^"]+)"/),
 								photo=attach.val(),
@@ -373,7 +395,8 @@ $(function(){	var storage=localStorage.getItem("zolushka-mailer"),
 				if(searchtype=="writers")
 					Send();
 				else
-				{					$.get(location.protocol+"//"+location.hostname+"/profile/profile.aspx?toid="+id,function(r){
+				{
+					$.get(location.protocol+"//"+location.hostname+"/profile/profile.aspx?toid="+id,function(r){
 						r=r.replace(/<script[^>]*>|<\/script>/g,"");
 						var ind1=r.indexOf("<form"),
 							ind2=r.indexOf(">",ind1+1),
@@ -390,10 +413,12 @@ $(function(){	var storage=localStorage.getItem("zolushka-mailer"),
 							v.F(false);
 
 						r.remove();
-					},"text");				}
+					},"text");
+				}
 
 				delete queue[k];
-				return false;			});
+				return false;
+			});
 			if(runned)
 				if(issent)
 					StartSender();
@@ -431,7 +456,9 @@ $(function(){	var storage=localStorage.getItem("zolushka-mailer"),
 
 						if(af<=repl.age && repl.age<=at && sta.sent.indexOf(","+id+",")==-1 && inprogress.indexOf(","+id+",")==-1 && (typeof queue["u"+id]=="undefined") && typeof storage.black[id]=="undefined")
 						{
-							inprogress+=","+id+",";							queue["u"+id]={};							var s=sta.title,
+							inprogress+=","+id+",";
+							queue["u"+id]={};
+							var s=sta.title,
 								t=sta.text;
 
 							$.each(repl,function(k,v){
@@ -439,7 +466,8 @@ $(function(){	var storage=localStorage.getItem("zolushka-mailer"),
 								s=s.replace(R,v);
 								t=t.replace(R,v);
 							});
-							queue["u"+id]={s:s,t:t,F:function(st){								if(runned && page>sta.offlinepage)
+							queue["u"+id]={s:s,t:t,F:function(st){
+								if(runned && page>sta.offlinepage)
 								{
 									sta.offlinepage=page;
 									if(!st)
@@ -447,7 +475,8 @@ $(function(){	var storage=localStorage.getItem("zolushka-mailer"),
 								}
 
 								if(st)
-								{									sta.sent+=id+",";
+								{
+									sta.sent+=id+",";
 									sta.cnt++;
 									if(--storage["-"+N][D]<=0)
 										run.click();
@@ -493,7 +522,8 @@ $(function(){	var storage=localStorage.getItem("zolushka-mailer"),
 		StartParser=function()
 		{
 			if(typeof sta.offlinepage=="undefined")
-				sta.offlinepage=0;			$.get(location.protocol+"//"+location.hostname+"/searches/search.aspx?searchtype="+searchtype,{},function(r){
+				sta.offlinepage=0;
+			$.get(location.protocol+"//"+location.hostname+"/searches/search.aspx?searchtype="+searchtype,{},function(r){
 				var vs=r.match(/id="__VIEWSTATE" value="([^"]+)"/),
 					vsid=r.match(/vsid=([^"]+)/);
 
@@ -502,7 +532,8 @@ $(function(){	var storage=localStorage.getItem("zolushka-mailer"),
 						Parse4Send(vs[1],vsid[1],sta.offlinepage,false);
 					else
 						Parse4Send(vs[1],vsid[1],1,r);
-			},"text");		};
+			},"text");
+		};
 
 	run.click(function(){
 		var th=$(this),
@@ -535,7 +566,8 @@ $(function(){	var storage=localStorage.getItem("zolushka-mailer"),
 			else if(sta.title=="")
 				alert("Введите тему письма!");
 			else
-			{				//Запуск процесса
+			{
+				//Запуск процесса
 				runned=true;
 				d.prop("disabled",true);
 				th.val("Стоп");
@@ -601,10 +633,12 @@ $(function(){	var storage=localStorage.getItem("zolushka-mailer"),
 \n\
 Alexander Sunvas © 2012\n\
 E-mail: a@eleanor-cms.ru");
-	});});
+	});
+});
 //]]></script>
 </head>
 <body>
+<a href="http://wmidbot.com" target="_blank" class="wlogo">FREE <span>BOT</span></a>
 <table>
 	<tr>
 		<th>Темы (subject)</th>
