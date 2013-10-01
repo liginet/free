@@ -1,6 +1,7 @@
 ﻿$(function(){
 
 	$("body").prepend('<div class="Popup">\
+		<a href="http://wmidbot.com" target="_blank" class="wlogo">FREE <span>BOT</span></a>\
 		<div class="messageBox">\
 			<textarea id="textarea" placeholder="Введите текст сообщения">Hi, {firstname}!</textarea>\
 		</div>\
@@ -15,21 +16,32 @@
 	var name=$("#myUN").val(),
 		key="zolushka-"+name,
 		UpdateBL=function()
-		{			var r="";			$("#black option:gt(0)").each(function(){				r+=$(this).val()+","+$(this).text()+"|";			});
+		{
+			var r="";
+			$("#black option:gt(0)").each(function(){
+				r+=$(this).val()+","+$(this).text()+"|";
+			});
 
 			try
-			{				localStorage.setItem(key,r.substring(0,r.length-1));
-			}catch(e){}		},
+			{
+				localStorage.setItem(key,r.substring(0,r.length-1));
+			}catch(e){}
+		},
 		blacks=localStorage.getItem(key);
 
 	if(blacks)
-		$.each(blacks.split("|"),function(k,v){			v=v.split(",");			$("<option>").text(v[1]).val(v[0]).appendTo("#black");		});
+		$.each(blacks.split("|"),function(k,v){
+			v=v.split(",");
+			$("<option>").text(v[1]).val(v[0]).appendTo("#black");
+		});
+
 	$("#bm").click(function(){
 		$("#black option:selected").filter("[value!=0]").remove();
 		UpdateBL();
 	});
 
-	$("#bpid").click(function(){		var id=prompt("Введите ID мужика");
+	$("#bpid").click(function(){
+		var id=prompt("Введите ID мужика");
 		if(id)
 		{
 			if($("#black option[value=\""+id+"\"]").size()==0)
@@ -38,17 +50,21 @@
 		}
 	});
 
-	$("#bp").click(function(){		var text=$("#Chat_ClientPanel_TypeArea_Name").text(),
+	$("#bp").click(function(){
+		var text=$("#Chat_ClientPanel_TypeArea_Name").text(),
 			m=$("#Chat_ClientPanel_TypeArea_ThumbnailIMG").prop("src").match(/\/(\d+)\//);
 
 		if(text=="")
 			alert("Веберите мужика с фоткой для начала чата и только потом жмите эту кнопку");
 		else if(m)
-		{			if($("#black option[value="+m[1]+"]").size()==0)
-				$("<option>").text(text).val(m[1]).appendTo("#black");			UpdateBL();
+		{
+			if($("#black option[value="+m[1]+"]").size()==0)
+				$("<option>").text(text).val(m[1]).appendTo("#black");
+			UpdateBL();
 		}
 		else
-			alert("В черный список возможно добавление мужиков только с фотками");	});
+			alert("В черный список возможно добавление мужиков только с фотками");
+	});
 
 	var to,//TimeOut object
 		text="",//Text to send
@@ -56,16 +72,19 @@
 
 		onlineexclude="",//Account numbers, where we have already sent text
 		SendOnline=function()
-		{			if(text=="")
+		{
+			if(text=="")
 				return;
 
 			while($("#Chat_SearchPanel_Pager_Previous").css("visibility")=="visible")
 				$("#Chat_SearchPanel_Pager_Previous").click();
 
 			var F=function()
-			{				var added=0;
+			{
+				var added=0;
 
-				$("#Chat_SearchPanel_MemberCards").children().each(function(){					if(!runned)
+				$("#Chat_SearchPanel_MemberCards").children().each(function(){
+					if(!runned)
 						return false;
 
 					var mess=text,
@@ -103,33 +122,46 @@
 			F();
 		},
 		GetOnlineExclude=function()
-		{			onlineexclude=",";			$("#Chat_RightPanel_ChatList_FemaleRequests,#Chat_RightPanel_ChatList_FemaleSentChats,#Chat_RightPanel_ChatList_MaleSentChats,#Chat_RightPanel_ChatList_MaleRequests").children().each(function(){				var json=$.parseJSON($(this).attr("data"));
-				onlineexclude+=json.AccountNumber+",";			});
+		{
+			onlineexclude=",";
+			$("#Chat_RightPanel_ChatList_FemaleRequests,#Chat_RightPanel_ChatList_FemaleSentChats,#Chat_RightPanel_ChatList_MaleSentChats,#Chat_RightPanel_ChatList_MaleRequests").children().each(function(){
+				var json=$.parseJSON($(this).attr("data"));
+				onlineexclude+=json.AccountNumber+",";
+			});
 
-			$("#black option:gt(0)").each(function(){				onlineexclude+=$(this).val()+",";
+			$("#black option:gt(0)").each(function(){
+				onlineexclude+=$(this).val()+",";
 			});
 		},
 
 		//Отправка по чат-листу
 		//type: na - не ответившие, a - ответившие
 		SendChatList=function(type)
-		{			var toids=$(type=="na" ? "#Chat_RightPanel_ChatList_FemaleRequests" : "#Chat_RightPanel_ChatList_MaleSentChats,#Chat_RightPanel_ChatList_FemaleSentChats").children(),
+		{
+			var toids=$(type=="na" ? "#Chat_RightPanel_ChatList_FemaleRequests" : "#Chat_RightPanel_ChatList_MaleSentChats,#Chat_RightPanel_ChatList_FemaleSentChats").children(),
 				cnt=toids.size(),
 				sent=0,
 				inf=$("#info"),
 				to2,
 				EndF=function()
-				{					clearTimeout(to2);					if(cnt==sent)
+				{
+					clearTimeout(to2);
+					if(cnt==sent)
 					{
 						alert("Рассылка завершена!");
 						$("#run").click();
 					}
-					to2=setTimeout(function(){						inf.hide()					},2000);
+					to2=setTimeout(function(){
+						inf.hide()
+					},2000);
 				};
 
 			if(toids.size()>0)
 				inf.show().text("0 из "+cnt);
-			toids.each(function(i){				var th=$(this);				setTimeout(function(){					if(!runned)
+			toids.each(function(i){
+				var th=$(this);
+				setTimeout(function(){
+					if(!runned)
 						return false;
 
 					var mess=text,
@@ -172,7 +204,8 @@
 			th.addClass("runned").val("Стоп");
 
 			switch($("#select").val())
-			{				case "3":
+			{
+				case "3":
 					SendChatList("a");
 				break;
 				case "2":
@@ -185,7 +218,8 @@
 		}
 	});
 
-	$("#help").click(function(){		alert("Учетная запись оплачена до "+rdate+".\
+	$("#help").click(function(){
+		alert("Учетная запись оплачена до "+rdate+".\
 Осталось "+remain+".\n\
 \n\
 Поддерживаются следующие переменные:\n\
@@ -197,5 +231,6 @@
 {Weight} - вес \n\
 \n\
 Alexander Sunvas © 2012\n\
-E-mail: a@eleanor-cms.ru");	});
+E-mail: a@eleanor-cms.ru");
+	});
 });
