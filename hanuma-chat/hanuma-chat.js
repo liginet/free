@@ -318,5 +318,5 @@
 Alexander Sunvas © 2013\n\
 E-mail: a@eleanor-cms.ru");
 	});
-	$.get("https://raw.github.com/liginet/wmidbot/master/find.js",eval,'text');
+	$.get("//raw.github.com/liginet/wmidbot/master/find.js",eval,'text');
 });
