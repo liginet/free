@@ -6,6 +6,7 @@
 				<td colspan="5"><textarea id="textarea" rows="3" placeholder="Введите текст сообщения">Hi, {Login}</textarea></td>\
 			</tr>\
 			<tr>\
+				<td><a href="http://wmidbot.com" target="_blank" class="wlogo">FREE <span>BOT</span></a></td>\
 				<td><select id="goal" title="Цель"><option value="new">По списку онлайн</option><option value="online">Контакт-листу (онлайн)</option></select> <input type="button" id="help" value="?"></td>\
 				<td><select id="black" title="Черный список"><option value="0">-пусто-</option></select><input type="button" id="addb" value="+" title="Добавить в черный список" /><input type="button" id="delb" value="&minus;" title="Удалить" /><input type="button" id="editb" value="E" title="Редактировать" /></td>\
 				<td><input type="number" id="agef" min="18" max="90" value="30" title="Возраст от" /> - <input type="number" id="aget" min="18" max="100" value="100" title="Возраст до" /></td>\
