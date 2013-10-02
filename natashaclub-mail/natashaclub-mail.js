@@ -1,5 +1,5 @@
 ﻿$(function(){
-
+	$('head').append('<style>#spamer {  border-bottom: solid 1px #D8D8D8; position: fixed; left: 0;  bottom: 0; z-index:9999;}#spamer table { border:1px solid #d8d8d8; border-collapse: collapse; font-size: 12px; background:#c0d7fd; width:100% }#spamer td { text-align:center; }#black { max-width:100px; }#spamer textarea { border:solid 1px #D8D8D8; font-family: arial; width:100%; }.wlogo { font-size: 23px;outline: none;text-decoration: none;color: rgb(86, 133, 214);}.wlogo span{color: rgb(102, 102, 102);}#td3 { margin-left:50px; }#info { font-weight:bold; width:55px; text-align:center;');
 	$("body").prepend('<div id="spamer">\
 		<table>\
 			<tr>\
