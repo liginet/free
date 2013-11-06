@@ -1,5 +1,5 @@
 $(function(){
-
+	$('head').append('<style>#sparner { height: 300px; border-bottom: solid 1px #D8D8D8; position: fixed; left: 0; width: 300px; bottom: 0; z-index:9999; background:#F7F7F7; }#sparner table { border:1px solid #d8d8d8; border-collapse: collapse; font-size: 12px; background:#c0d7fd; width:100% }#sparner th, #sparner td { padding-top:5px; }#sparner th { text-align:right; width:100px; }#sparner td { text-align:left; padding-left:5px; }#sparner input[type=button]{ padding-left:7px; padding-right:7px; padding-top:1px; padding-bottom:1px; }#sparner select { width:100px; }#sparner textarea { width:100%; height:100px; }#info { font-weight:bold; }.error {display:block;border:solid 1px #E89B88;color:#000;background:#FFEFE8;padding:3px;font-weight:bold;}</style>');
     $("body").prepend('<div id="sparner">\
         <table>\
             <tr><th>Цель</th><td><select id="goal"><option value="search">Поиск</option><option value="writers">Писатели</option></select></td></tr>\
