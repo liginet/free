@@ -238,6 +238,8 @@ $(function(){
 				},
 				function(r)
 				{
+					r=JSON.parse(r);
+					console.log(r);
 					$("<div>").html(r.general.data).find(".ichat_loaddata_item").each(function(){
 						inchatlist+=parseInt($("span:first",this).prop("onclick").toString().match(/(\d+)/)[1])+",";
 					}).end().remove();
@@ -254,7 +256,7 @@ $(function(){
 							}
 						);
 				},
-				"json"
+				"text"
 			);
 
 		};
