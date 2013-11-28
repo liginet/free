@@ -246,8 +246,6 @@ $(function(){
 					
 					console.log(inchatlist);
 					if(runned)
-					{
-						console.log("111");
 						$.post(
 							"/ichat_get_online.php",
 							{
@@ -255,12 +253,10 @@ $(function(){
 							},
 							function(r2)
 							{
-								console.log("2222");
 								Parse4Send(r2,1);
 							},
 							"text"
 						);
-					}
 				},
 				"text"
 			);
