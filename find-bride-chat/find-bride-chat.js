@@ -243,8 +243,7 @@ $(function(){
 					$("<div>").html(r.general.data).find(".ichat_loaddata_item").each(function(){
 						inchatlist+=parseInt(this.innerHTML.match(/(\d+)/)[1])+",";
 					}).end().remove();
-					
-					console.log(inchatlist);
+
 					if(runned)
 						$.post(
 							"/ichat_get_online.php",
