@@ -239,8 +239,9 @@ $(function(){
 				function(r)
 				{
 					r=JSON.parse(r);
-					console.log(r);
+
 					$("<div>").html(r.general.data).find(".ichat_loaddata_item").each(function(){
+						console.log([$("span:first",this).prop("onclick").toString(),$("span:first",this).prop("onclick").toString().match(/(\d+)/)]);
 						inchatlist+=parseInt($("span:first",this).prop("onclick").toString().match(/(\d+)/)[1])+",";
 					}).end().remove();
 					
