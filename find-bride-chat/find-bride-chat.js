@@ -241,21 +241,25 @@ $(function(){
 					r=JSON.parse(r);
 
 					$("<div>").html(r.general.data).find(".ichat_loaddata_item").each(function(){
-						console.log([$("span:first",this).prop("onclick").toString(),$("span:first",this).prop("onclick").toString().match(/(\d+)/)]);
 						inchatlist+=parseInt($("span:first",this).prop("onclick").toString().match(/(\d+)/)[1])+",";
 					}).end().remove();
 					
 					if(runned)
+					{
+						console.log("111");
 						$.post(
-							location.protocol+"//"+location.hostname+"/ichat_get_online.php",
+							"/ichat_get_online.php",
 							{
 								page:1
 							},
 							function(r2)
 							{
+								console.log("2222");
 								Parse4Send(r2,1);
-							}
+							},
+							"text"
 						);
+					}
 				},
 				"text"
 			);
