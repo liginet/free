@@ -241,13 +241,10 @@ $(function(){
 					r=JSON.parse(r);
 
 					$("<div>").html(r.general.data).find(".ichat_loaddata_item").each(function(){
-						console.dir(this);
-						console.log($("span:first",this));
-						inchatlist+=parseInt($("span:first",this).prop("onclick").toString().match(/(\d+)/)[1])+",";
-						console.log("Yes");
+						inchatlist+=parseInt(this.innerHTML.match(/(\d+)/)[1])+",";
 					}).end().remove();
 					
-					console.log("000");
+					console.log(inchatlist);
 					if(runned)
 					{
 						console.log("111");
