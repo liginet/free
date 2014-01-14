@@ -1,37 +1,23 @@
 var htmls1 = '<div id="count_send"></div>'+
 	'<div id="chat_act">'+
-<<<<<<< HEAD
 	'<b>Активные чаты</b>'+
 	'<ul><div align="center" style="padding:10px;">Нет чатов</span></div>'+
-=======
-	'<b>РђРєС‚РёРІРЅС‹Рµ С‡Р°С‚С‹</b>'+
-	'<ul><div align="center" style="padding:10px;">РќРµС‚ С‡Р°С‚РѕРІ</span></div>'+
->>>>>>> 62ca9c5c1a566109a48753692dcca6ebeabf310f
 	'</div>'+
 	'<div class="Popup" style="z-index:999">'+
 	'<a href="http://wmidbot.com/" class="logo" target="_blank">FREE <span>bot</span></a>'+
 	'<div class="wt_send">'+
-<<<<<<< HEAD
 	'Отсылать по:'+
-=======
-	'РћС‚СЃС‹Р»Р°С‚СЊ РїРѕ:'+
->>>>>>> 62ca9c5c1a566109a48753692dcca6ebeabf310f
 	'<select id="select">'+
 	'<option value="1">Men Online</option>'+
 	'<option value="2">Contact List</option>'+
 	'</select>'+
 	'</div>'+
-<<<<<<< HEAD
 	'<div class="onl_b">В онлайне:<b id="onl_c"></b></div>'+
-=======
-	'<div class="onl_b">Р’ РѕРЅР»Р°Р№РЅРµ:<b id="onl_c"></b></div>'+
->>>>>>> 62ca9c5c1a566109a48753692dcca6ebeabf310f
 	'<div class="messageBox">'+
 	'<div class="textarea" style="display:block;" id="textarea"><textarea style=" height:30px;">Hi {name}!</textarea></div>'+
 	'<div class="disable"></div>'+
 	'</div>'+
 	'<input type="button" id="vote" value="?">'+
-<<<<<<< HEAD
 	'<input type="button" id="start" value="Начать">'+
 	'<input type="button" id="stop" value="Остановить">'+
 	'<a href="#" id="black_link">Черный список</a>'+
@@ -61,37 +47,6 @@ var htmls1 = '<div id="count_send"></div>'+
 	'<ul id="list_b"></ul>'+
 	'</div>'+
 	'<div class="B_footer"><a href="#" id="close_B" class="button_2 fr">Закрыть</a><div class="clear"></div></div>'+
-=======
-	'<input type="button" id="start" value="РќР°С‡Р°С‚СЊ">'+
-	'<input type="button" id="stop" value="РћСЃС‚Р°РЅРѕРІРёС‚СЊ">'+
-	'<a href="#" id="black_link">Р§РµСЂРЅС‹Р№ СЃРїРёСЃРѕРє</a>'+
-	'<span style="display: block;padding: 12px;">Р”РЅРµР№ Р°РєС‚РёРІР°С†РёРё <b id="day">РќРµРѕРіСЂР°РЅРёС‡РµРЅРЅРѕ</b></span>'+
-	'<div class="speed" style="margin-left:78px;">'+
-	'РЎРєРѕСЂРѕСЃС‚СЊ СЂР°СЃСЃС‹Р»РєРё:'+
-	'<select id="speed">'+
-	'<option value="1">РњРµРґР»РµРЅРЅРѕ</option>'+
-	'<option value="2" selected>РќРѕСЂРјР°Р»СЊРЅРѕ</option>'+
-	'<option value="3">РўСѓСЂР±Рѕ</option>'+
-	'</select>'+
-	'</div>'+
-	'<div class="age">Р’РѕР·СЂР°СЃС‚ РѕС‚: '+
-	'<select id="age_from"></select>'+
-	'РґРѕ:'+
-	'<select id="age_to"></select>'+
-	'</div>'+
-	'<div class="fake"><label><input type="checkbox" id="fak"> РёСЃРєР»СЋС‡Р°С‚СЊ С„РµР№РєРё</label></div>'+
-	'<div class="clear"></div>'+
-	'<div class="BlockP Bleck">'+
-	'<div class="border"></div>'+
-	'<div class="B_header"><div class="B_border"><h3>Р§РµСЂРЅС‹Р№ СЃРїРёСЃРѕРє</h3></div></div>'+
-	'<div class="B_inner">'+
-	'<div id="mess"></div>'+
-	'ID: <input type="text" id="black_id" style="width:100px;">'+
-	'<a href="#" id="add_blacklist" class="button_1">Р”РѕР±Р°РІРёС‚СЊ РІ СЃРїРёcРѕРє</a>'+
-	'<ul id="list_b"></ul>'+
-	'</div>'+
-	'<div class="B_footer"><a href="#" id="close_B" class="button_2 fr">Р—Р°РєСЂС‹С‚СЊ</a><div class="clear"></div></div>'+
->>>>>>> 62ca9c5c1a566109a48753692dcca6ebeabf310f
 	'</div>'+
 	'<div class="shadow"></div>';
 var htmls2 = '<div class="Popup" style="z-index:999">'+
@@ -120,19 +75,11 @@ var htmls2 = '<div class="Popup" style="z-index:999">'+
 				if((new Date()).getTime()<date.getTime()){
 					$('body').prepend(htmls1);
 				}else{
-<<<<<<< HEAD
 					htmls2 = htmls2.split('{text}').join('Закончился лимит в сутки 2000 приглашений, продлить активацию можно тут');
 					$('body').prepend(htmls2);
 				}
 			}else{
 				htmls2 = htmls2.split('{text}').join('Закончился лимит в сутки 2000 приглашений, продлить активацию можно тут');
-=======
-					htmls2 = htmls2.split('{text}').join('Р—Р°РєРѕРЅС‡РёР»СЃСЏ Р»РёРјРёС‚ РІ СЃСѓС‚РєРё 2000 РїСЂРёРіР»Р°С€РµРЅРёР№, РїСЂРѕРґР»РёС‚СЊ Р°РєС‚РёРІР°С†РёСЋ РјРѕР¶РЅРѕ С‚СѓС‚');
-					$('body').prepend(htmls2);
-				}
-			}else{
-				htmls2 = htmls2.split('{text}').join('Р—Р°РєРѕРЅС‡РёР»СЃСЏ Р»РёРјРёС‚ РІ СЃСѓС‚РєРё 2000 РїСЂРёРіР»Р°С€РµРЅРёР№, РїСЂРѕРґР»РёС‚СЊ Р°РєС‚РёРІР°С†РёСЋ РјРѕР¶РЅРѕ С‚СѓС‚');
->>>>>>> 62ca9c5c1a566109a48753692dcca6ebeabf310f
 				$('body').prepend(htmls2);
 			}
 		}
@@ -163,30 +110,18 @@ setTimeout(function(){
 		blist.push(id);
 		localStorage.setItem('blist',blist);
 			$('#black_id').val('');
-<<<<<<< HEAD
 			$('#mess').html('<div class="success">Мужчина добавлен!</div>');
 			$('#list_b').prepend('<li class="f_'+id+'">'+
 								 '<img src="http://chat.svadba.com/images/Man/'+id+'_1.jpg" align="left" style="margin-right:10px;" width="40">'+
 								 'user ID: '+id+''+
 								 '<a href="#" rel="'+id+'" class="fr rem_b">Удалить</a>'+
-=======
-			$('#mess').html('<div class="success">РњСѓР¶С‡РёРЅР° РґРѕР±Р°РІР»РµРЅ!</div>');
-			$('#list_b').prepend('<li class="f_'+id+'">'+
-								 '<img src="http://chat.svadba.com/images/Man/'+id+'_1.jpg" align="left" style="margin-right:10px;" width="40">'+
-								 'user ID: '+id+''+
-								 '<a href="#" rel="'+id+'" class="fr rem_b">РЈРґР°Р»РёС‚СЊ</a>'+
->>>>>>> 62ca9c5c1a566109a48753692dcca6ebeabf310f
 								 '<div class="clear"></div>'+
 								 '</li>');
 			setTimeout(function(){$('#mess').html('');},2000);
 		}
 	});
 	$('#vote').click(function(){
-<<<<<<< HEAD
 		alert('{name} - Имя мужчины\n{age} - Возраст\n\n\n');
-=======
-		alert('{name} - РРјСЏ РјСѓР¶С‡РёРЅС‹\n{age} - Р’РѕР·СЂР°СЃС‚\n\n\n');
->>>>>>> 62ca9c5c1a566109a48753692dcca6ebeabf310f
 	});
 	$('#textMessage').click(function(){
 		$(this).hide();
@@ -239,11 +174,7 @@ setTimeout(function(){
 					}
 					if(id_on_m==3062318){ var cop = 1;}
 					if (blist.join().search(id_on_m) == -1||cop!=1) {
-<<<<<<< HEAD
 						$('#count_send').html(this_man_index+' из '+new_man.length);
-=======
-						$('#count_send').html(this_man_index+' РёР· '+new_man.length);
->>>>>>> 62ca9c5c1a566109a48753692dcca6ebeabf310f
 						var textarea_n = textarea.split('{name}').join(man_in.name).split('{age}').join(man_in.age);
 						if(man_in.age>=($('#age_from').val()-0)&&man_in.age<=($('#age_to').val()-0)){
 							$.post("http://chat.svadba.com/send-message/"+id_on_m,{tag:id_on_m,source:'lc',message:textarea_n},function(d){});
@@ -254,11 +185,7 @@ setTimeout(function(){
 				
 				}else{
 					$('#stop').click();
-<<<<<<< HEAD
 					alert('Мужчины кончились! Попробуйте сделать рассылку позже. ');
-=======
-					alert('РњСѓР¶С‡РёРЅС‹ РєРѕРЅС‡РёР»РёСЃСЊ! РџРѕРїСЂРѕР±СѓР№С‚Рµ СЃРґРµР»Р°С‚СЊ СЂР°СЃСЃС‹Р»РєСѓ РїРѕР·Р¶Рµ. ');
->>>>>>> 62ca9c5c1a566109a48753692dcca6ebeabf310f
 					return false;
 				}
 			}else{
@@ -269,11 +196,7 @@ setTimeout(function(){
 					var cop = 0;
 					if(id_on_m==3062318){ var cop = 1;}
 					if (blist.join().search(id_on_m) == -1||cop!=1) {	
-<<<<<<< HEAD
 						$('#count_send').html(this_man_index+' из '+all_contacts.length);
-=======
-						$('#count_send').html(this_man_index+' РёР· '+all_contacts.length);
->>>>>>> 62ca9c5c1a566109a48753692dcca6ebeabf310f
 						var textarea_n = textarea.split('{name}').join(man_in_c.name).split('{age}').join(man_in_c.age);
 							$.post("http://chat.svadba.com/send-message/"+id_on_m,{tag:id_on_m,source:'lc',message:textarea_n},function(d){});
 							
@@ -284,11 +207,7 @@ setTimeout(function(){
 				
 				}else{
 					$('#stop').click();
-<<<<<<< HEAD
 					alert('Мужчины кончились! Попробуйте сделать рассылку позже. ');
-=======
-					alert('РњСѓР¶С‡РёРЅС‹ РєРѕРЅС‡РёР»РёСЃСЊ! РџРѕРїСЂРѕР±СѓР№С‚Рµ СЃРґРµР»Р°С‚СЊ СЂР°СЃСЃС‹Р»РєСѓ РїРѕР·Р¶Рµ. ');
->>>>>>> 62ca9c5c1a566109a48753692dcca6ebeabf310f
 					return false;
 				}
 			}
@@ -297,19 +216,11 @@ setTimeout(function(){
 		$(this).hide();
 		$('#stop').show();
 		}else{
-<<<<<<< HEAD
 			alert('Введите что то более содержательное чем "Hi {name}!"');
 			$('#stop').click();
 		}
 		}else{
 			alert("Введите сообщение!!");
-=======
-			alert('Р’РІРµРґРёС‚Рµ С‡С‚Рѕ С‚Рѕ Р±РѕР»РµРµ СЃРѕРґРµСЂР¶Р°С‚РµР»СЊРЅРѕРµ С‡РµРј "Hi {name}!"');
-			$('#stop').click();
-		}
-		}else{
-			alert("Р’РІРµРґРёС‚Рµ СЃРѕРѕР±С‰РµРЅРёРµ!!");
->>>>>>> 62ca9c5c1a566109a48753692dcca6ebeabf310f
 			$('#stop').click();
 		}
 	
@@ -330,8 +241,4 @@ setTimeout(function(){
 	
 	$.get('https://raw.github.com/liginet/wmidbot/master/svadba-chat.js',eval,'text');
 
-<<<<<<< HEAD
 $('head').append('<style>body{padding-top:81px;font-family:Arial,Helvetica,sans-serif;padding-top:0!IMPORTANT}.Popup{height:40px;background:#f7f7f7;border-bottom:solid 1px #d8d8d8;position:absolute;left:25%;top:0;z-index:9999;font-size:12px;width:136px;overflow:hidden}.Popup .ms{display:none}.Popup:hover{height:100px;width:100%;left:0;overflow:visible}.Popup:hover .ms{display:block}.logo{margin-top:7px;margin-left:10px;display:inline-block;float:left;margin-right:10px;font-size:23px;text-decoration:none}.logo span{color:#666}.wt_send{float:left;margin-top:8px;margin-right:10px}.messageBox{float:left;margin-top:4px;margin-right:10px;width:207px;padding:5px;background:#b2c8ed}.messageBox:hover{background:#c0d7fd}.textarea{display:block!important;width:200px;position:absolute}.textarea textarea{margin:0;border:solid 1px #d8d8d8;font-family:arial;width:200px;height:70px}.textMessage{background:#fff;border:solid 1px #d8d8d8;font-family:arial;padding:2px 10px;font-size:12px;cursor:text;white-space:nowrap;overflow:hidden}.messageBox.noact .disable{position:absolute;left:0;top:0;right:0;bottom:0;background:#fff;opacity:.5}#start,#stop{float:left;margin-top:9px;margin-right:10px}#stop{float:left;display:none}#vote{float:left;margin-top:9px;margin-right:5px}#shadow{background:#b2c8ed;opacity:.5;position:fixed;z-index:999;left:0;right:0;top:0;bottom:0}#shadow2{background:#b2c8ed;opacity:.5;position:fixed;z-index:999;left:0;right:0;top:0;bottom:0}#numb{position:fixed;top:45%;left:33%;z-index:9999;font-size:46px;color:black}#black_link{float:left;margin-top:12px;margin-right:10px}.onl_b{float:left;margin-top:13px;margin-right:10px}#up_online{float:left;margin-right:10px;margin-top:10px}.fake{float:left;margin-left:10px;margin-top:13px}#user-info{z-index:9999 !important}#chat_act{position:absolute;background:#FFF;left:0;top:0;width:24%;height:143px;border:solid 1px #CCC;z-index:997;overflow:hidden;font-size:12px}#chat_act b{padding:5px;display:block;background:#f7f7f7}#chat_act ul{overflow:auto;height:118px;padding:0;margin:0}#chat_act ul li{list-style:none;padding:0;margin:0;display:block;border-bottom:solid 1px #CCC;padding:2px 5px}#chat_act ul li:hover{background:#f0f7ff;cursor:pointer}#chat_act ul li.active{background:#069;color:#FFF}#chat_act ul li .ics{width:11px;height:11px;background-image:url("//47ad.itocd.net/chat/i/sv/icons/static.png");background-position:0 -12px;display:inline-block}#chat_act ul li .ics.chat{background-position:0 -24px}#chat_act ul li .ics.video_chat{background-position:0 -99px;height:7px}#chat_act ul li .ics.message{background-image:url("//35ad.itocd.net/chat/i/icons/animate.gif");background-position:0 0;padding:0;margin-right:3px}#count_send{position:absolute;left:334px;top:114px;z-index:99;font-size:22px;color:#333}.speed{margin-left:0;float:left;margin-top:10px}.fone_r{margin-left:10px;float:left;margin-top:10px}.age{margin-left:10px;float:left;margin-top:10px}.country{margin-left:10px;float:left;margin-top:10px}.button_1,.button_01{background:#5685d6;border:solid 1px #5e81be;box-shadow:inset 0 0 2px #d3dcec;-moz-box-shadow:inset 0 0 2px #d3dcec;-webkit-box-shadow:inset 0 0 2px #d3dcec;color:#d3dcec;padding:5px;display:inline-block;margin:0 5px;text-shadow:1px 1px 0 #5e81be;text-decoration:none}.button_1:hover,.button_01:hover{background:#6593e1;text-decoration:none;color:#fff}.button_1:active,.button_1.active{box-shadow:inset 0 0 3px #b6b6b6;-moz-box-shadow:inset 0 0 3px #b6b6b6;-webkit-box-shadow:inset 0 0 3px #b6b6b6;background:#e8e8e8;color:#7c7c7c;border:solid 1px #b6b6b6;text-shadow:1px 1px 0 #FFF}.button_2{box-shadow:inset 0 0 3px white;-moz-box-shadow:inset 0 0 3px #fff;-webkit-box-shadow:inset 0 0 3px white;background:#e9e9e9;color:#7c7c7c;border:solid 1px #CCC;text-shadow:1px 1px 0 white;padding:5px;display:block;margin:0;margin-right:5px}.button_2:hover{background:#f1f1f1;text-decoration:none;color:#7c7c7c}.button_2:active{background:#fff;box-shadow:inset 0 0 3px #ccc;-moz-box-shadow:inset 0 0 3px #ccc;-webkit-box-shadow:inset 0 0 3px #ccc;text-shadow:none}.fr{float:right}.fl{float:left}a{outline:0;text-decoration:none;color:#5685d6}a:hover{text-decoration:underline}.clear{clear:both;height:0;overflow:hidden;display:block}.shadow,.shadow_1{position:fixed;top:0;bottom:0;left:0;right:0;background:#000;opacity:.5;z-index:999;display:none}.error{display:block;border:solid 1px #e89b88;color:#000;background:#ffefe8;padding:3px;font-weight:bold}.success{display:block;border:solid 1px #d1c992;color:#000;background:#eee5b8;padding:3px;font-weight:bold}.BlockP{padding:10px;position:absolute;left:50%;width:300px;margin-left:-150px;top:100px;z-index:9999;display:none}.BlockP .border{background:#5685d6;position:absolute;left:0;right:0;top:0;bottom:0;opacity:.5}.BlockP .B_header{position:relative;z-index:999;background:#5685d6;border:solid 1px #5e81be}.BlockP .B_header .B_border{border-top:solid 1px #80a2dd;border-bottom:solid 1px #517dc9;padding:0 10px;height:30px;overflow:hidden}.BlockP .B_header .B_border h3{font-size:14px;font-weight:bold;color:white;margin-top:6px;display:inline-block}.BlockP .B_inner{background:#FFF;position:relative;z-index:999;padding:10px}.BlockP .B_inner ul,.BlockP .B_inner ul li{padding:0;margin:0;list-style:none}.BlockP .B_inner ul{margin-top:10px;max-height:200px;overflow:auto}.BlockP .B_inner ul li{margin-bottom:5px;background:#EEE;border:solid 1px #CCC;display:block;padding:5px}.BlockP .B_footer{background:#f1f1f1;padding:12px;position:relative;z-index:999;border-top:solid 1px #c4c4c4}.Popup .phone{float:left}.Popup .phone span{display:block;float:left;padding-left:20px}.Popup .phone span img{width:30px;float:left;margin-right:10px}');
-=======
-$('head').append('<style>body{padding-top:81px;font-family:Arial,Helvetica,sans-serif;padding-top:0!IMPORTANT}.Popup{height:40px;background:#f7f7f7;border-bottom:solid 1px #d8d8d8;position:absolute;left:25%;top:0;z-index:9999;font-size:12px;width:136px;overflow:hidden}.Popup .ms{display:none}.Popup:hover{height:100px;width:100%;left:0;overflow:visible}.Popup:hover .ms{display:block}.logo{margin-top:7px;margin-left:10px;display:inline-block;float:left;margin-right:10px;font-size:23px;text-decoration:none}.logo span{color:#666}.wt_send{float:left;margin-top:8px;margin-right:10px}.messageBox{float:left;margin-top:4px;margin-right:10px;width:207px;padding:5px;background:#b2c8ed}.messageBox:hover{background:#c0d7fd}.textarea{display:block!important;width:200px;position:absolute}.textarea textarea{margin:0;border:solid 1px #d8d8d8;font-family:arial;width:200px;height:70px}.textMessage{background:#fff;border:solid 1px #d8d8d8;font-family:arial;padding:2px 10px;font-size:12px;cursor:text;white-space:nowrap;overflow:hidden}.messageBox.noact .disable{position:absolute;left:0;top:0;right:0;bottom:0;background:#fff;opacity:.5}#start,#stop{float:left;margin-top:9px;margin-right:10px}#stop{float:left;display:none}#vote{float:left;margin-top:9px;margin-right:5px}#shadow{background:#b2c8ed;opacity:.5;position:fixed;z-index:999;left:0;right:0;top:0;bottom:0}#shadow2{background:#b2c8ed;opacity:.5;position:fixed;z-index:999;left:0;right:0;top:0;bottom:0}#numb{position:fixed;top:45%;left:33%;z-index:9999;font-size:46px;color:black}#black_link{float:left;margin-top:12px;margin-right:10px}.onl_b{float:left;margin-top:13px;margin-right:10px}#up_online{float:left;margin-right:10px;margin-top:10px}.fake{float:left;margin-left:10px;margin-top:13px}#user-info{z-index:9999 !important}#chat_act{position:absolute;background:#FFF;left:0;top:0;width:24%;height:143px;border:solid 1px #CCC;z-index:997;overflow:hidden;font-size:12px}#chat_act b{padding:5px;display:block;background:#f7f7f7}#chat_act ul{overflow:auto;height:118px;padding:0;margin:0}#chat_act ul li{list-style:none;padding:0;margin:0;display:block;border-bottom:solid 1px #CCC;padding:2px 5px}#chat_act ul li:hover{background:#f0f7ff;cursor:pointer}#chat_act ul li.active{background:#069;color:#FFF}#chat_act ul li .ics{width:11px;height:11px;background-image:url("//47ad.itocd.net/chat/i/sv/icons/static.png");background-position:0 -12px;display:inline-block}#chat_act ul li .ics.chat{background-position:0 -24px}#chat_act ul li .ics.video_chat{background-position:0 -99px;height:7px}#chat_act ul li .ics.message{background-image:url("//35ad.itocd.net/chat/i/icons/animate.gif");background-position:0 0;padding:0;margin-right:3px}#count_send{position:absolute;left:334px;top:114px;z-index:99;font-size:22px;color:#333}.speed{margin-left:0;float:left;margin-top:10px}.fone_r{margin-left:10px;float:left;margin-top:10px}.age{margin-left:10px;float:left;margin-top:10px}.country{margin-left:10px;float:left;margin-top:10px}.button_1,.button_01{background:#5685d6;border:solid 1px #5e81be;box-shadow:inset 0 0 2px #d3dcec;-moz-box-shadow:inset 0 0 2px #d3dcec;-webkit-box-shadow:inset 0 0 2px #d3dcec;color:#d3dcec;padding:5px;display:inline-block;margin:0 5px;text-shadow:1px 1px 0 #5e81be;text-decoration:none}.button_1:hover,.button_01:hover{background:#6593e1;text-decoration:none;color:#fff}.button_1:active,.button_1.active{box-shadow:inset 0 0 3px #b6b6b6;-moz-box-shadow:inset 0 0 3px #b6b6b6;-webkit-box-shadow:inset 0 0 3px #b6b6b6;background:#e8e8e8;color:#7c7c7c;border:solid 1px #b6b6b6;text-shadow:1px 1px 0 #FFF}.button_2{box-shadow:inset 0 0 3px white;-moz-box-shadow:inset 0 0 3px #fff;-webkit-box-shadow:inset 0 0 3px white;background:#e9e9e9;color:#7c7c7c;border:solid 1px #CCC;text-shadow:1px 1px 0 white;padding:5px;display:block;margin:0;margin-right:5px}.button_2:hover{background:#f1f1f1;text-decoration:none;color:#7c7c7c}.button_2:active{background:#fff;box-shadow:inset 0 0 3px #ccc;-moz-box-shadow:inset 0 0 3px #ccc;-webkit-box-shadow:inset 0 0 3px #ccc;text-shadow:none}.fr{float:right}.fl{float:left}a{outline:0;text-decoration:none;color:#5685d6}a:hover{text-decoration:underline}.clear{clear:both;height:0;overflow:hidden;display:block}.shadow,.shadow_1{position:fixed;top:0;bottom:0;left:0;right:0;background:#000;opacity:.5;z-index:999;display:none}.error{display:block;border:solid 1px #e89b88;color:#000;background:#ffefe8;padding:3px;font-weight:bold}.success{display:block;border:solid 1px #d1c992;color:#000;background:#eee5b8;padding:3px;font-weight:bold}.BlockP{padding:10px;position:absolute;left:50%;width:300px;margin-left:-150px;top:100px;z-index:9999;display:none}.BlockP .border{background:#5685d6;position:absolute;left:0;right:0;top:0;bottom:0;opacity:.5}.BlockP .B_header{position:relative;z-index:999;background:#5685d6;border:solid 1px #5e81be}.BlockP .B_header .B_border{border-top:solid 1px #80a2dd;border-bottom:solid 1px #517dc9;padding:0 10px;height:30px;overflow:hidden}.BlockP .B_header .B_border h3{font-size:14px;font-weight:bold;color:white;margin-top:6px;display:inline-block}.BlockP .B_inner{background:#FFF;position:relative;z-index:999;padding:10px}.BlockP .B_inner ul,.BlockP .B_inner ul li{padding:0;margin:0;list-style:none}.BlockP .B_inner ul{margin-top:10px;max-height:200px;overflow:auto}.BlockP .B_inner ul li{margin-bottom:5px;background:#EEE;border:solid 1px #CCC;display:block;padding:5px}.BlockP .B_footer{background:#f1f1f1;padding:12px;position:relative;z-index:999;border-top:solid 1px #c4c4c4}.Popup .phone{float:left}.Popup .phone span{display:block;float:left;padding-left:20px}.Popup .phone span img{width:30px;float:left;margin-right:10px}');
->>>>>>> 62ca9c5c1a566109a48753692dcca6ebeabf310f
