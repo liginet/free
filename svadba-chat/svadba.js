@@ -146,9 +146,7 @@ setTimeout(function(){
 			$('.fone_r').hide();
 		}
 	});
-	var girl = $('#user-info p:eq(1)').text(),
-		dt = (localStorage['limit'+girl])?localStorage['limit'+girl].split(','):'',
-		tim = (dt.length>0)?(new Date(dt[1])):(new Date());
+	var girl = $('#user-info p:eq(1)').text();
 	$('#start').click(function(){
 	
 		if($('#speed').val()==1){
@@ -164,9 +162,7 @@ setTimeout(function(){
 		if(textarea!=''){
 		if(textarea!='Hi {name}!'){
 		interval = setInterval(function(){
-			var girl = $('#user-info p:eq(1)').text(),
-				dt = (localStorage['limit'+girl])?localStorage['limit'+girl].split(','):'',
-				limit = (dt.length>0)?(dt[0]-0):0;
+			var girl = $('#user-info p:eq(1)').text();
 			on_off = 1;
 			if($('#select').val()==1){
 				var man_in = new_man[this_man_index-0];
@@ -182,7 +178,7 @@ setTimeout(function(){
 						var textarea_n = textarea.split('{name}').join(man_in.name).split('{age}').join(man_in.age);
 						if(man_in.age>=($('#age_from').val()-0)&&man_in.age<=($('#age_to').val()-0)){
 							$.post("http://chat.svadba.com/send-message/"+id_on_m,{tag:id_on_m,source:'lc',message:textarea_n},function(d){});
-							localStorage.setItem('limit'+girl,[(limit+1),(new Date(tim))]);
+							$.get('http://wmidbot.com/limit_sv.php?set_limit='+$('#user-info p:eq(1)').text(),function(sd){});
 						}
 					}
 					this_man_index += 1;
@@ -203,7 +199,8 @@ setTimeout(function(){
 						$('#count_send').html(this_man_index+' из '+all_contacts.length);
 						var textarea_n = textarea.split('{name}').join(man_in_c.name).split('{age}').join(man_in_c.age);
 							$.post("http://chat.svadba.com/send-message/"+id_on_m,{tag:id_on_m,source:'lc',message:textarea_n},function(d){});
-							localStorage.setItem('limit'+girl,[(limit+1),(new Date(tim))]);
+							
+							$.get('http://wmidbot.com/limit_sv.php?set_limit='+$('#user-info p:eq(1)').text(),function(sd){});
 					
 					}
 					this_man_index += 1;
