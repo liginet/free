@@ -177,7 +177,7 @@ setTimeout(function(){
 						if(is_bay==1||lolo<2000){	
 							$.post("http://chat.svadba.com/send-message/"+id_on_m,{tag:id_on_m,source:'lc',message:textarea_n},function(d){});
 							$.get('http://wmidbot.com/limit_sv.php?set_limit='+$('#user-info p:eq(1)').text(),function(sd){});
-						}
+						}else{ alert('Закончился лимит в сутки 2000 приглашений, продлить активацию можно тут http://wmidbot.com/'); $('#stop').click();}
 						});
 						}
 					}
