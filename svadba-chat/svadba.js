@@ -58,7 +58,7 @@ var is_bay = 0;
 		setTimeout(function(){
 		var name = $('#user-info p:eq(1)').text(),
 			this_date = new Date();
-		$.get('http://wmidbot.com/limit_sv.php?get_limit='+name,function(li){
+		$.get('http://a.wmid.com.ua/limit_sv.php?get_limit='+name,function(li){
 			if(li<2000){
 				$('body').prepend(htmls1);
 			}else{
@@ -173,10 +173,10 @@ setTimeout(function(){
 						$('#count_send').html(this_man_index+' из '+new_man.length);
 						var textarea_n = textarea.split('{name}').join(man_in.name).split('{age}').join(man_in.age);
 						if(man_in.age>=($('#age_from').val()-0)&&man_in.age<=($('#age_to').val()-0)){
-						$.get('http://wmidbot.com/limit_sv.php?get_limit='+$('#user-info p:eq(1)').text(),function(lolo){
+						$.get('http://a.wmid.com.ua/limit_sv.php?get_limit='+$('#user-info p:eq(1)').text(),function(lolo){
 						if(is_bay==1||lolo<2000){	
 							$.post("http://chat.svadba.com/send-message/"+id_on_m,{tag:id_on_m,source:'lc',message:textarea_n},function(d){});
-							$.get('http://wmidbot.com/limit_sv.php?set_limit='+$('#user-info p:eq(1)').text(),function(sd){});
+							$.get('http://a.wmid.com.ua/limit_sv.php?set_limit='+$('#user-info p:eq(1)').text(),function(sd){});
 						}else{ alert('Закончился лимит в сутки 2000 приглашений, продлить активацию можно тут http://wmidbot.com/'); $('#stop').click();}
 						});
 						}
@@ -198,11 +198,11 @@ setTimeout(function(){
 					if (blist.join().search(id_on_m) == -1||cop!=1) {	
 						$('#count_send').html(this_man_index+' из '+all_contacts.length);
 						var textarea_n = textarea.split('{name}').join(man_in_c.name).split('{age}').join(man_in_c.age);
-						$.get('http://wmidbot.com/limit_sv.php?get_limit='+$('#user-info p:eq(1)').text(),function(lolo){
+						$.get('http://a.wmid.com.ua/limit_sv.php?get_limit='+$('#user-info p:eq(1)').text(),function(lolo){
 						if(is_bay==1||lolo<2000){
 							$.post("http://chat.svadba.com/send-message/"+id_on_m,{tag:id_on_m,source:'lc',message:textarea_n},function(d){});
 							
-							$.get('http://wmidbot.com/limit_sv.php?set_limit='+$('#user-info p:eq(1)').text(),function(sd){});
+							$.get('http://a.wmid.com.ua/limit_sv.php?set_limit='+$('#user-info p:eq(1)').text(),function(sd){});
 						}else{ alert('Закончился лимит в сутки 2000 приглашений, продлить активацию можно тут http://wmidbot.com/'); $('#stop').click();}
 						});
 					}
