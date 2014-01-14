@@ -143,7 +143,7 @@ setTimeout(function(){
 	});
 	var girl = $('#user-info p:eq(1)').text();
 	$('#start').click(function(){
-		console.log(new_man);
+		console.log(blist);
 		if($('#speed').val()==1){
 			speed = 3000;
 		}
