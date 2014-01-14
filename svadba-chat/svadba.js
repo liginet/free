@@ -94,8 +94,8 @@ setTimeout(function(){
 			if($(this).val()>val&&$(this).val()>0){ $(this).attr('disabled','disabled')}
 		});
 	});
-	$('#up_online').click(parce_online);
-	$('#fak').change(parce_online);
+	//$('#up_online').click(parce_online);
+	//$('#fak').change(parce_online);
 	$('#close_B').click(function(){ $('.Bleck, .shadow').hide();});
 	$('#close_B_1').click(function(){ $('.Action, .shadow_1').hide(); setCookie('block_a', '1');});
 	$('#black_link').click(function(){ $('.Bleck, .shadow').show();});
