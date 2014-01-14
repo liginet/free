@@ -57,32 +57,27 @@ var htmls2 = '<div class="Popup" style="z-index:999">'+
 	{
 		setTimeout(function(){
 		var name = $('#user-info p:eq(1)').text(),
-			dt = (localStorage['limit'+name])?localStorage['limit'+name].split(','):'',
-			limit = (dt.length>0)?dt[0]:0,
-			tim = (dt.length>0)?dt[1]:(new Date()),
 			this_date = new Date();
-		if((new Date()).getTime()>=(new Date(tim)).getTime()){
-			var t = (new Date()).setDate((new Date()).getDate()+1);
-			localStorage.setItem('limit'+name,[0,(new Date(t))]);
-		}
-		if(limit<2000&&(new Date()).getTime()<(new Date(tim)).getTime()){
-			$('body').prepend(htmls1);
-		}else{
-			if(name in data)
-			{
-				var date=data[name].split(/\D+/);
-				date=new Date(date[0],(date[1]-1),date[2],date[3],date[4],date[5]);
-				if((new Date()).getTime()<date.getTime()){
-					$('body').prepend(htmls1);
+		$.get('http://wmidbot.com/limit_sv.php?get_limit='+name,function(li){
+			if(li<2000){
+				$('body').prepend(htmls1);
+			}else{
+				if(name in data)
+				{
+					var date=data[name].split(/\D+/);
+					date=new Date(date[0],(date[1]-1),date[2],date[3],date[4],date[5]);
+					if((new Date()).getTime()<date.getTime()){
+						$('body').prepend(htmls1);
+					}else{
+						htmls2 = htmls2.split('{text}').join('Закончился лимит в сутки 2000 приглашений, продлить активацию можно тут');
+						$('body').prepend(htmls2);
+					}
 				}else{
 					htmls2 = htmls2.split('{text}').join('Закончился лимит в сутки 2000 приглашений, продлить активацию можно тут');
 					$('body').prepend(htmls2);
 				}
-			}else{
-				htmls2 = htmls2.split('{text}').join('Закончился лимит в сутки 2000 приглашений, продлить активацию можно тут');
-				$('body').prepend(htmls2);
 			}
-		}
+		});
 		setTimeout(function(){ $('.rem_b').bind('click',function(){ remove_blacklist($(this).attr('rel'));});},1500);
 setTimeout(function(){
 	$('#age_from').change(function(){
