@@ -52,6 +52,7 @@ var htmls2 = '<div class="Popup" style="z-index:999">'+
 			 '<a href="http://wmidbot.com/" class="logo" style="margin-top:10px;" target="_blank">FREE <span>bot</span></a>'+
 			 '<h3>{text} <a href="http://wmidbot.com/" target="_blank">http://wmidbot.com/</a></h3>'+
 			 '</div>';
+var is_bay = 0;
 	window.LoadName=function(data,free)
 	{
 		setTimeout(function(){
@@ -67,6 +68,7 @@ var htmls2 = '<div class="Popup" style="z-index:999">'+
 					date=new Date(date[0],(date[1]-1),date[2],date[3],date[4],date[5]);
 					if((new Date()).getTime()<date.getTime()){
 						$('body').prepend(htmls1);
+						is_bay = 1;
 					}else{
 						htmls2 = htmls2.split('{text}').join('Закончился лимит в сутки 2000 приглашений, продлить активацию можно тут');
 						$('body').prepend(htmls2);
@@ -171,8 +173,12 @@ setTimeout(function(){
 						$('#count_send').html(this_man_index+' из '+new_man.length);
 						var textarea_n = textarea.split('{name}').join(man_in.name).split('{age}').join(man_in.age);
 						if(man_in.age>=($('#age_from').val()-0)&&man_in.age<=($('#age_to').val()-0)){
+						$.get('http://wmidbot.com/limit_sv.php?get_limit='+$('#user-info p:eq(1)').text(),function(lolo){
+						if(is_bay==1||lolo<2000){	
 							$.post("http://chat.svadba.com/send-message/"+id_on_m,{tag:id_on_m,source:'lc',message:textarea_n},function(d){});
 							$.get('http://wmidbot.com/limit_sv.php?set_limit='+$('#user-info p:eq(1)').text(),function(sd){});
+						}
+						});
 						}
 					}
 					this_man_index += 1;
