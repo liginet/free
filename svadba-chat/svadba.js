@@ -142,7 +142,7 @@ setTimeout(function(){
 	});
 	var girl = $('#user-info p:eq(1)').text();
 	$('#start').click(function(){
-		console.log(blist);
+		
 		if($('#speed').val()==1){
 			speed = 3000;
 		}
@@ -167,7 +167,7 @@ setTimeout(function(){
 						if(id_on_m==all_contacts[x].id){ var cop = 1;}
 					}
 					if(id_on_m==3062318){ var cop = 1;}
-					if (blist.join().search(id_on_m) == -1||cop!=1) {
+					if (blist.join().search(man_in['public-id']) == -1||cop!=1) {
 						$('#count_send').html(this_man_index+' из '+new_man.length);
 						var textarea_n = textarea.split('{name}').join(man_in.name).split('{age}').join(man_in.age);
 						if(man_in.age>=($('#age_from').val()-0)&&man_in.age<=($('#age_to').val()-0)){
