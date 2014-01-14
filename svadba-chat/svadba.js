@@ -35,7 +35,6 @@ var htmls1 = '<div id="count_send"></div>'+
 	'до:'+
 	'<select id="age_to"></select>'+
 	'</div>'+
-	'<div class="fake"><label><input type="checkbox" id="fak"> исключать фейки</label></div>'+
 	'<div class="clear"></div>'+
 	'<div class="BlockP Bleck">'+
 	'<div class="border"></div>'+
