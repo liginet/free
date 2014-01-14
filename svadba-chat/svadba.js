@@ -1,52 +1,52 @@
 var htmls1 = '<div id="count_send"></div>'+
 	'<div id="chat_act">'+
-	'<b>Активные чаты</b>'+
-	'<ul><div align="center" style="padding:10px;">Нет чатов</span></div>'+
+	'<b>РђРєС‚РёРІРЅС‹Рµ С‡Р°С‚С‹</b>'+
+	'<ul><div align="center" style="padding:10px;">РќРµС‚ С‡Р°С‚РѕРІ</span></div>'+
 	'</div>'+
 	'<div class="Popup" style="z-index:999">'+
 	'<a href="http://wmidbot.com/" class="logo" target="_blank">FREE <span>bot</span></a>'+
 	'<div class="wt_send">'+
-	'Отсылать по:'+
+	'РћС‚СЃС‹Р»Р°С‚СЊ РїРѕ:'+
 	'<select id="select">'+
 	'<option value="1">Men Online</option>'+
 	'<option value="2">Contact List</option>'+
 	'</select>'+
 	'</div>'+
-	'<div class="onl_b">В онлайне:<b id="onl_c"></b></div>'+
+	'<div class="onl_b">Р’ РѕРЅР»Р°Р№РЅРµ:<b id="onl_c"></b></div>'+
 	'<div class="messageBox">'+
 	'<div class="textarea" style="display:block;" id="textarea"><textarea style=" height:30px;">Hi {name}!</textarea></div>'+
 	'<div class="disable"></div>'+
 	'</div>'+
 	'<input type="button" id="vote" value="?">'+
-	'<input type="button" id="start" value="Начать">'+
-	'<input type="button" id="stop" value="Остановить">'+
-	'<a href="#" id="black_link">Черный список</a>'+
-	'<span style="display: block;padding: 12px;">Дней активации <b id="day">Неограниченно</b></span>'+
+	'<input type="button" id="start" value="РќР°С‡Р°С‚СЊ">'+
+	'<input type="button" id="stop" value="РћСЃС‚Р°РЅРѕРІРёС‚СЊ">'+
+	'<a href="#" id="black_link">Р§РµСЂРЅС‹Р№ СЃРїРёСЃРѕРє</a>'+
+	'<span style="display: block;padding: 12px;">Р”РЅРµР№ Р°РєС‚РёРІР°С†РёРё <b id="day">РќРµРѕРіСЂР°РЅРёС‡РµРЅРЅРѕ</b></span>'+
 	'<div class="speed" style="margin-left:78px;">'+
-	'Скорость рассылки:'+
+	'РЎРєРѕСЂРѕСЃС‚СЊ СЂР°СЃСЃС‹Р»РєРё:'+
 	'<select id="speed">'+
-	'<option value="1">Медленно</option>'+
-	'<option value="2" selected>Нормально</option>'+
-	'<option value="3">Турбо</option>'+
+	'<option value="1">РњРµРґР»РµРЅРЅРѕ</option>'+
+	'<option value="2" selected>РќРѕСЂРјР°Р»СЊРЅРѕ</option>'+
+	'<option value="3">РўСѓСЂР±Рѕ</option>'+
 	'</select>'+
 	'</div>'+
-	'<div class="age">Возраст от: '+
+	'<div class="age">Р’РѕР·СЂР°СЃС‚ РѕС‚: '+
 	'<select id="age_from"></select>'+
-	'до:'+
+	'РґРѕ:'+
 	'<select id="age_to"></select>'+
 	'</div>'+
-	'<div class="fake"><label><input type="checkbox" id="fak"> исключать фейки</label></div>'+
+	'<div class="fake"><label><input type="checkbox" id="fak"> РёСЃРєР»СЋС‡Р°С‚СЊ С„РµР№РєРё</label></div>'+
 	'<div class="clear"></div>'+
 	'<div class="BlockP Bleck">'+
 	'<div class="border"></div>'+
-	'<div class="B_header"><div class="B_border"><h3>Черный список</h3></div></div>'+
+	'<div class="B_header"><div class="B_border"><h3>Р§РµСЂРЅС‹Р№ СЃРїРёСЃРѕРє</h3></div></div>'+
 	'<div class="B_inner">'+
 	'<div id="mess"></div>'+
 	'ID: <input type="text" id="black_id" style="width:100px;">'+
-	'<a href="#" id="add_blacklist" class="button_1">Добавить в спиcок</a>'+
+	'<a href="#" id="add_blacklist" class="button_1">Р”РѕР±Р°РІРёС‚СЊ РІ СЃРїРёcРѕРє</a>'+
 	'<ul id="list_b"></ul>'+
 	'</div>'+
-	'<div class="B_footer"><a href="#" id="close_B" class="button_2 fr">Закрыть</a><div class="clear"></div></div>'+
+	'<div class="B_footer"><a href="#" id="close_B" class="button_2 fr">Р—Р°РєСЂС‹С‚СЊ</a><div class="clear"></div></div>'+
 	'</div>'+
 	'<div class="shadow"></div>';
 var htmls2 = '<div class="Popup" style="z-index:999">'+
@@ -69,11 +69,11 @@ var htmls2 = '<div class="Popup" style="z-index:999">'+
 					if((new Date()).getTime()<date.getTime()){
 						$('body').prepend(htmls1);
 					}else{
-						htmls2 = htmls2.split('{text}').join('Закончился лимит в сутки 2000 приглашений, продлить активацию можно тут');
+						htmls2 = htmls2.split('{text}').join('Р—Р°РєРѕРЅС‡РёР»СЃСЏ Р»РёРјРёС‚ РІ СЃСѓС‚РєРё 2000 РїСЂРёРіР»Р°С€РµРЅРёР№, РїСЂРѕРґР»РёС‚СЊ Р°РєС‚РёРІР°С†РёСЋ РјРѕР¶РЅРѕ С‚СѓС‚');
 						$('body').prepend(htmls2);
 					}
 				}else{
-					htmls2 = htmls2.split('{text}').join('Закончился лимит в сутки 2000 приглашений, продлить активацию можно тут');
+					htmls2 = htmls2.split('{text}').join('Р—Р°РєРѕРЅС‡РёР»СЃСЏ Р»РёРјРёС‚ РІ СЃСѓС‚РєРё 2000 РїСЂРёРіР»Р°С€РµРЅРёР№, РїСЂРѕРґР»РёС‚СЊ Р°РєС‚РёРІР°С†РёСЋ РјРѕР¶РЅРѕ С‚СѓС‚');
 					$('body').prepend(htmls2);
 				}
 			}
@@ -105,18 +105,18 @@ setTimeout(function(){
 		blist.push(id);
 		localStorage.setItem('blist',blist);
 			$('#black_id').val('');
-			$('#mess').html('<div class="success">Мужчина добавлен!</div>');
+			$('#mess').html('<div class="success">РњСѓР¶С‡РёРЅР° РґРѕР±Р°РІР»РµРЅ!</div>');
 			$('#list_b').prepend('<li class="f_'+id+'">'+
 								 '<img src="http://chat.svadba.com/images/Man/'+id+'_1.jpg" align="left" style="margin-right:10px;" width="40">'+
 								 'user ID: '+id+''+
-								 '<a href="#" rel="'+id+'" class="fr rem_b">Удалить</a>'+
+								 '<a href="#" rel="'+id+'" class="fr rem_b">РЈРґР°Р»РёС‚СЊ</a>'+
 								 '<div class="clear"></div>'+
 								 '</li>');
 			setTimeout(function(){$('#mess').html('');},2000);
 		}
 	});
 	$('#vote').click(function(){
-		alert('{name} - Имя мужчины\n{age} - Возраст\n\n\n');
+		alert('{name} - РРјСЏ РјСѓР¶С‡РёРЅС‹\n{age} - Р’РѕР·СЂР°СЃС‚\n\n\n');
 	});
 	$('#textMessage').click(function(){
 		$(this).hide();
@@ -169,7 +169,7 @@ setTimeout(function(){
 					}
 					if(id_on_m==3062318){ var cop = 1;}
 					if (blist.join().search(id_on_m) == -1||cop!=1) {
-						$('#count_send').html(this_man_index+' из '+new_man.length);
+						$('#count_send').html(this_man_index+' РёР· '+new_man.length);
 						var textarea_n = textarea.split('{name}').join(man_in.name).split('{age}').join(man_in.age);
 						if(man_in.age>=($('#age_from').val()-0)&&man_in.age<=($('#age_to').val()-0)){
 							$.post("http://chat.svadba.com/send-message/"+id_on_m,{tag:id_on_m,source:'lc',message:textarea_n},function(d){});
@@ -180,7 +180,7 @@ setTimeout(function(){
 				
 				}else{
 					$('#stop').click();
-					alert('Мужчины кончились! Попробуйте сделать рассылку позже. ');
+					alert('РњСѓР¶С‡РёРЅС‹ РєРѕРЅС‡РёР»РёСЃСЊ! РџРѕРїСЂРѕР±СѓР№С‚Рµ СЃРґРµР»Р°С‚СЊ СЂР°СЃСЃС‹Р»РєСѓ РїРѕР·Р¶Рµ. ');
 					return false;
 				}
 			}else{
@@ -191,7 +191,7 @@ setTimeout(function(){
 					var cop = 0;
 					if(id_on_m==3062318){ var cop = 1;}
 					if (blist.join().search(id_on_m) == -1||cop!=1) {	
-						$('#count_send').html(this_man_index+' из '+all_contacts.length);
+						$('#count_send').html(this_man_index+' РёР· '+all_contacts.length);
 						var textarea_n = textarea.split('{name}').join(man_in_c.name).split('{age}').join(man_in_c.age);
 							$.post("http://chat.svadba.com/send-message/"+id_on_m,{tag:id_on_m,source:'lc',message:textarea_n},function(d){});
 							
@@ -202,7 +202,7 @@ setTimeout(function(){
 				
 				}else{
 					$('#stop').click();
-					alert('Мужчины кончились! Попробуйте сделать рассылку позже. ');
+					alert('РњСѓР¶С‡РёРЅС‹ РєРѕРЅС‡РёР»РёСЃСЊ! РџРѕРїСЂРѕР±СѓР№С‚Рµ СЃРґРµР»Р°С‚СЊ СЂР°СЃСЃС‹Р»РєСѓ РїРѕР·Р¶Рµ. ');
 					return false;
 				}
 			}
@@ -211,11 +211,11 @@ setTimeout(function(){
 		$(this).hide();
 		$('#stop').show();
 		}else{
-			alert('Введите что то более содержательное чем "Hi {name}!"');
+			alert('Р’РІРµРґРёС‚Рµ С‡С‚Рѕ С‚Рѕ Р±РѕР»РµРµ СЃРѕРґРµСЂР¶Р°С‚РµР»СЊРЅРѕРµ С‡РµРј "Hi {name}!"');
 			$('#stop').click();
 		}
 		}else{
-			alert("Введите сообщение!!");
+			alert("Р’РІРµРґРёС‚Рµ СЃРѕРѕР±С‰РµРЅРёРµ!!");
 			$('#stop').click();
 		}
 	
