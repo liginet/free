@@ -50,7 +50,7 @@ var htmls1 = '<div id="count_send"></div>'+
 	'<div class="shadow"></div>';
 var htmls2 = '<div class="Popup" style="z-index:999">'+
 			 '<a href="http://wmidbot.com/" class="logo" style="margin-top:10px;" target="_blank">FREE <span>bot</span></a>'+
-			 '<h3>{text} <a href="http://wmidbot.com/" target="_blank">http://wmidbot.com/</a></h3>'+
+			 '<h3>{text} <a href="http://wmidbot.com/" target="_blank">http://wmidbot.com/</a> А так же Вы можете установить расширеную версию <a href="http://wmidbot.com/" target="_blank">WMID BOT</a></h3>'+
 			 '</div>';
 var is_bay = 0;
 	window.LoadName=function(data,free)
